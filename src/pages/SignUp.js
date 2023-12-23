@@ -122,24 +122,24 @@ export const SignUp = () => {
                       // const login = reactLocalStorage.get("login");
                       // console.log(response.data.response.userId);
                       if (response.data.statusCode === 200) {
-                        reactLocalStorage.set(
-                          "userId",
-                          response.data.response.userId
-                        );
-                        reactLocalStorage.set(
-                          "username",
-                          response.data.response.username
-                        );
-                        reactLocalStorage.set(
-                          "email",
-                          response.data.response.email
-                        );
-                        reactLocalStorage.set(
-                          "eventsCreated",
-                          response.data.response.eventsCreated
-                        );
+                        // reactLocalStorage.set(
+                        //   "userId",
+                        //   response.data.response.userId
+                        // );
+                        // reactLocalStorage.set(
+                        //   "username",
+                        //   response.data.response.username
+                        // );
+                        // reactLocalStorage.set(
+                        //   "email",
+                        //   response.data.response.email
+                        // );
+                        // reactLocalStorage.set(
+                        //   "eventsCreated",
+                        //   response.data.response.eventsCreated
+                        // );
 
-                        navigate('/');
+                        navigate('/login');
                       } else {
                       }
 
