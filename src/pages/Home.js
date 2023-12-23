@@ -268,6 +268,7 @@ export const Home = () => {
                       console.log(response);
           
                       console.log(response.data.statusCode);
+                      window.location.reload();
                       if (response.data.statusCode === 200) {
                         window.location.reload();
                         // navigate("/");
@@ -282,6 +283,7 @@ export const Home = () => {
                       // setStatus({ success: false });
                       // setErrors({ submit: error.response.data.message });
                       // setSubmitting(false);
+                      window.location.reload();
                       setIsLoading(false);
                       // console.log(error);
                     });
