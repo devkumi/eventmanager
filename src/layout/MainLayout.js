@@ -110,14 +110,13 @@ export const Layout = () => {
             {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Test
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Disabled</Button>
         </Toolbar>
       </AppBar>
       <Box marginLeft={5} marginRight={5} marginTop={15}  theme={theme} >
         {/* breadcrumb */}
-        {/* <Breadcrumbs separator={IconChevronRight} navigation={menuItems} icon title rightAlign /> */}
         <Outlet   />
       </Box>
     </Box>
