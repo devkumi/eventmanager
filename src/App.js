@@ -5,9 +5,12 @@ import { Home } from "./pages/Home";
 
 import { Contact } from "./pages/Contact";
 import {Login} from "./pages/Login";
+import { Provider } from 'react-redux';
+import { store } from 'store';
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
