@@ -114,14 +114,7 @@ export const Login = () => {
                       headers: { "Content-Type": "multipart/form-data" },
                     },
                   })
-                    //   .post(baseUrl + "/login", {
-                    //     email: values.email,
-                    //     password: values.password,
-                    //   },{
-                    //     headers: {
-                    //         'Content-Type': 'application/json'
-                    //     },
-                    // })
+                  
                     .then(function (response) {
                       console.log(response);
 
