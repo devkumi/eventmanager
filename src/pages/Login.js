@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
 import {
@@ -18,16 +19,18 @@ import {
   OutlinedInput,
   Stack,
   Typography,
+  useMediaQuery,
   // useMediaQuery
 } from "@mui/material";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import axios from "axios";
+import { baseUrl } from "../global/variables";
 
 export const Login = () => {
   const theme = useTheme();
-  //   const navigate = useNavigate();
-  // const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-  // const customization = useSelector((state) => state.customization);
+  const navigate = useNavigate();
+  const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
   const [checked, setChecked] = useState(true);
 
   // const googleHandler = async () => {
@@ -47,12 +50,17 @@ export const Login = () => {
     <div className="Auth-form-container">
       <Grid item xs={12}>
         <Grid container alignItems="center" justifyContent="center">
-          <Grid  item>
-            <Stack marginBottom={5} alignItems="center" justifyContent="center" spacing={1}>
+          <Grid xs={12} item>
+            <Stack
+              marginBottom={5}
+              alignItems="center"
+              justifyContent="center"
+              spacing={1}
+            >
               <Typography
                 color={theme.palette.secondary.main}
                 gutterBottom
-                variant={"h2"}
+                variant={"h3"}
               >
                 Hi, Welcome Back
               </Typography>
@@ -92,12 +100,74 @@ export const Login = () => {
                 //   setSubmitting(false);
                 // }, 5000);
 
-                reactLocalStorage.set("login", true);
-                const login = reactLocalStorage.get("login");
-
                 try {
-                  setSubmitting(false);
+                  //   setSubmitting(false);
 
+                  const responsea = axios({
+                    method: "post",
+                    url: baseUrl + "/login",
+                    data: {
+                      email: values.email,
+                      password: values.password,
+                    },
+                    config: {
+                      headers: { "Content-Type": "multipart/form-data" },
+                    },
+                  })
+                    //   .post(baseUrl + "/login", {
+                    //     email: values.email,
+                    //     password: values.password,
+                    //   },{
+                    //     headers: {
+                    //         'Content-Type': 'application/json'
+                    //     },
+                    // })
+                    .then(function (response) {
+                      console.log(response);
+
+                      reactLocalStorage.set("login", true);
+                      const login = reactLocalStorage.get("login");
+                      // console.log(response.data.response.userId);
+                      if (response.data.statusCode === 200) {
+                        reactLocalStorage.set(
+                          "userId",
+                          response.data.response.userId
+                        );
+                        reactLocalStorage.set(
+                          "username",
+                          response.data.response.username
+                        );
+                        reactLocalStorage.set(
+                          "email",
+                          response.data.response.email
+                        );
+                        reactLocalStorage.set(
+                          "eventsCreated",
+                          response.data.response.eventsCreated
+                        );
+
+                        navigate('/');
+                      } else {
+                      }
+
+                      return response;
+                    })
+                    .catch(function (error) {
+                      // console.log(error.response.data.message);
+                      setStatus({ success: false });
+                      setErrors({ submit: error.response.data.message });
+                      setSubmitting(false);
+                      console.log(error);
+                    });
+
+                  //   console.log(responsea.response.status);
+
+                  // const dataa = await responsea.json();
+                  // return responsea;
+                  //   console.log(responsea);
+
+                  // reactLocalStorage.set("login", true);
+                  // const login = reactLocalStorage.get("login");
                   // if (scriptedRef.current && login) {
 
                   //   console.log("Login", login )
@@ -106,7 +176,7 @@ export const Login = () => {
                   //   setSubmitting(false);
                   // }
                 } catch (err) {
-                  console.error(err);
+                  //   console.error("error",err);
                   // if (scriptedRef.current) {
                   //   setStatus({ success: false });
                   //   setErrors({ submit: err.message });
