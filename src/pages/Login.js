@@ -278,7 +278,7 @@ export const Login = () => {
                       color="secondary"
                       sx={{ textDecoration: "none", cursor: "pointer" }}
                     >
-                      Forgot Password?
+                      Create Account
                     </Typography>
                   </Stack>
                   {errors.submit && (
