@@ -102,19 +102,23 @@ export const SignUp = () => {
 
                 try {
                   //   setSubmitting(false);
-
+                  const result = values.email
+                  .substring(0, values.email.indexOf("@"));
+                  const randomnum = Math.floor(Math.random() * 5);
+console.log(result + randomnum)
                   const responsea = axios({
                     method: "post",
                     url: baseUrl + "/register",
                     data: {
                       email: values.email,
                       password: values.password,
+                      username: values.email
+                        .substring(0, values.email.indexOf("@")),
                     },
                     config: {
                       headers: { "Content-Type": "multipart/form-data" },
                     },
                   })
-                  
                     .then(function (response) {
                       console.log(response);
 
@@ -138,7 +142,6 @@ export const SignUp = () => {
                         //   "eventsCreated",
                         //   response.data.response.eventsCreated
                         // );
-
                         navigate('/login');
                       } else {
                       }
@@ -147,10 +150,12 @@ export const SignUp = () => {
                     })
                     .catch(function (error) {
                       // console.log(error.response.data.message);
+                      console.log(error);
                       setStatus({ success: false });
                       setErrors({ submit: error.response.data.message });
                       setSubmitting(false);
                       console.log(error);
+                      navigate('/login');
                     });
 
                   //   console.log(responsea.response.status);
@@ -256,7 +261,7 @@ export const SignUp = () => {
                       </FormHelperText>
                     )}
                   </FormControl>
-                  
+
                   {errors.submit && (
                     <Box sx={{ mt: 3 }}>
                       <FormHelperText error>{errors.submit}</FormHelperText>
