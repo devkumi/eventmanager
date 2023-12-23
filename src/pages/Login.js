@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
 import {
@@ -273,13 +273,8 @@ export const Login = () => {
                       }
                       label="Remember me"
                     />
-                    <Typography
-                      variant="subtitle1"
-                      color="secondary"
-                      sx={{ textDecoration: "none", cursor: "pointer" }}
-                    >
-                      Create Account
-                    </Typography>
+                    
+                    <Link to="/createaccount">Create Account</Link>
                   </Stack>
                   {errors.submit && (
                     <Box sx={{ mt: 3 }}>
