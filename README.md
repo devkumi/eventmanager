@@ -17,4 +17,4 @@ You may also see any lint errors in the console.
 ## Create accout
 ## login
 ## create event
-## check and row to edit or delete event
+## check boxes in the table to edit or delete event
